@@ -79,11 +79,6 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-subtle);
-      transition: padding 0.3s ease;
-    }
-
-    nav.scrolled {
-      padding: 1rem 3rem;
     }
 
     .nav-logo {
@@ -1222,10 +1217,6 @@
 
     reveals.forEach(el => observer.observe(el));
 
-    /* ── Nav scroll state ── */
-    window.addEventListener('scroll', () => {
-      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
-    });
 
     /* ── Mobile nav toggle ── */
     document.getElementById('nav-toggle').addEventListener('click', () => {
