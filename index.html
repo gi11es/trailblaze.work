@@ -137,11 +137,34 @@
       padding: 0.6rem 1.2rem;
       border-radius: 100px;
       white-space: nowrap;
+      position: relative;
+      overflow: hidden;
       text-decoration: none;
       letter-spacing: 0.02em;
       transition: all 0.3s ease;
       border: none;
       cursor: pointer;
+    }
+
+    .nav-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(
+        105deg,
+        transparent 20%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 80%
+      );
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 70%, 100% { left: -100%; }
+      85% { left: 150%; }
     }
 
     .nav-cta:hover {
