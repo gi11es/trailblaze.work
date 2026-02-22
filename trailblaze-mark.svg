@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="fire" x1="66" y1="26" x2="446" y2="472" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#e89a2e"/>
+      <stop offset="40%" stop-color="#e86a2e"/>
+      <stop offset="100%" stop-color="#c83418"/>
+    </linearGradient>
+  </defs>
+
+  <!-- A-shaped flame — thick bold legs, narrow counter slit -->
+  <path d="
+    M256 26
+    L446 472
+    L318 374
+    L261 84
+    L251 84
+    L194 374
+    L66 472
+    Z
+  " fill="url(#fire)"/>
+
+  <!-- Ascending ember trail -->
+  <circle cx="256" cy="326" r="9"   fill="#e89a2e"/>
+  <circle cx="256" cy="280" r="7.5" fill="#e87a2e"/>
+  <circle cx="256" cy="238" r="6"   fill="#e86a2e"/>
+  <circle cx="256" cy="200" r="4.5" fill="#f05020"/>
+  <circle cx="256" cy="166" r="3"   fill="#ff4d1a"/>
+</svg>
