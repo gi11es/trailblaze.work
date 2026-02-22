@@ -390,7 +390,6 @@
     .section-tag {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
       font-family: var(--font-body);
       font-size: 0.75rem;
       font-weight: 500;
@@ -398,14 +397,6 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       margin-bottom: 1.5rem;
-    }
-
-    .section-tag::before {
-      content: '';
-      display: block;
-      width: 20px;
-      height: 1px;
-      background: var(--accent-amber);
     }
 
     .section-heading {
@@ -656,53 +647,6 @@
       color: var(--text-secondary);
     }
 
-    /* ── Stats ── */
-    .stats-section {
-      background: var(--bg-card);
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 3rem;
-      text-align: center;
-    }
-
-    .stat-item {
-      position: relative;
-    }
-
-    .stat-item:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      right: -1.5rem;
-      top: 20%;
-      height: 60%;
-      width: 1px;
-      background: var(--border-subtle);
-    }
-
-    .stat-number {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: clamp(2.5rem, 4vw, 3.5rem);
-      letter-spacing: -0.03em;
-      background: var(--gradient-fire);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.1;
-      margin-bottom: 0.5rem;
-    }
-
-    .stat-label {
-      font-weight: 400;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      letter-spacing: 0.02em;
-    }
 
     /* ── Principles ── */
     .principles-grid {
@@ -753,6 +697,71 @@
       font-size: 0.9rem;
       line-height: 1.65;
       color: var(--text-secondary);
+    }
+
+    /* ── Case Study ── */
+    .case-study-charts {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .chart-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2.5rem;
+      overflow: hidden;
+    }
+
+    .chart-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.25rem;
+    }
+
+    .chart-subtitle {
+      font-weight: 300;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-container svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .chart-callout {
+      display: flex;
+      gap: 3rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .callout-item .callout-number {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.6rem;
+      background: var(--gradient-fire);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .callout-item .callout-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 0.15rem;
+    }
+
+    @media (max-width: 768px) {
+      .chart-card { padding: 1.5rem; }
+      .chart-callout { gap: 2rem; }
     }
 
     /* ── CTA ── */
@@ -1058,25 +1067,108 @@
     </div>
   </section>
 
-  <!-- Stats -->
-  <section class="stats-section">
+  <!-- Case Study -->
+  <section id="case-study">
     <div class="section-inner">
-      <div class="stats-grid">
-        <div class="stat-item reveal">
-          <div class="stat-number">10x</div>
-          <div class="stat-label">Productivity gains</div>
+      <div class="section-tag">Case Study</div>
+      <h2 class="section-heading">Same team.<br>Different output.</h2>
+      <p class="section-desc">A software company we worked with over 16 months. Headcount stayed flat. The way they worked changed completely.</p>
+
+      <div class="case-study-charts">
+        <!-- Chart 1: Cumulative output -->
+        <div class="chart-card reveal">
+          <h4 class="chart-title">Cumulative code output</h4>
+          <p class="chart-subtitle">Functional code only. Team size held constant.</p>
+          <div class="chart-container">
+            <svg viewBox="0 0 800 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="rgba(232,154,46,0.35)"/>
+                  <stop offset="100%" stop-color="rgba(232,154,46,0.02)"/>
+                </linearGradient>
+              </defs>
+              <!-- Y-axis labels -->
+              <text x="42" y="238" fill="#5c5652" font-family="Outfit,sans-serif" font-size="11" text-anchor="end">0</text>
+              <text x="42" y="128" fill="#5c5652" font-family="Outfit,sans-serif" font-size="11" text-anchor="end">200k</text>
+              <text x="42" y="25" fill="#5c5652" font-family="Outfit,sans-serif" font-size="11" text-anchor="end">400k</text>
+              <!-- Subtle grid lines -->
+              <line x1="50" y1="230" x2="780" y2="230" stroke="rgba(232,154,46,0.06)" stroke-width="1"/>
+              <line x1="50" y1="125" x2="780" y2="125" stroke="rgba(232,154,46,0.06)" stroke-width="1"/>
+              <line x1="50" y1="20" x2="780" y2="20" stroke="rgba(232,154,46,0.06)" stroke-width="1"/>
+              <!-- Engagement vertical line -->
+              <line x1="415" y1="15" x2="415" y2="235" stroke="rgba(232,154,46,0.3)" stroke-width="1" stroke-dasharray="4,4"/>
+              <text x="415" y="12" fill="#e89a2e" font-family="Outfit,sans-serif" font-size="10" font-weight="500" text-anchor="middle">TRAILBLAZE ENGAGED</text>
+              <!-- Projected trend (without engagement) -->
+              <line x1="415" y1="203" x2="780" y2="178" stroke="#5c5652" stroke-width="1" stroke-dasharray="6,4" opacity="0.5"/>
+              <text x="782" y="176" fill="#5c5652" font-family="Outfit,sans-serif" font-size="10" font-weight="300">Projected</text>
+              <!-- Area fill -->
+              <polygon points="50,230 50,228 98,225 146,222 194,219 242,216 290,213 338,209 386,205 415,203 434,190 482,172 530,152 578,130 626,105 674,76 722,44 770,10 770,230" fill="url(#areaFill)"/>
+              <!-- Main line -->
+              <polyline points="50,228 98,225 146,222 194,219 242,216 290,213 338,209 386,205 415,203 434,190 482,172 530,152 578,130 626,105 674,76 722,44 770,10" stroke="#e89a2e" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+              <!-- End dot -->
+              <circle cx="770" cy="10" r="4" fill="#e89a2e"/>
+              <!-- Growth rate annotations -->
+              <text x="220" y="198" fill="#9a9590" font-family="Outfit,sans-serif" font-size="11" text-anchor="middle">+6k / month</text>
+              <text x="640" y="62" fill="#e89a2e" font-family="Outfit,sans-serif" font-size="13" font-weight="600" text-anchor="middle">+35k / month</text>
+            </svg>
+          </div>
+          <div class="chart-callout">
+            <div class="callout-item">
+              <div class="callout-number">5.5x</div>
+              <div class="callout-label">Acceleration in delivery rate</div>
+            </div>
+            <div class="callout-item">
+              <div class="callout-number">400k</div>
+              <div class="callout-label">Lines shipped in 16 months</div>
+            </div>
+          </div>
         </div>
-        <div class="stat-item reveal">
-          <div class="stat-number">92%</div>
-          <div class="stat-label">Staff adoption rate</div>
-        </div>
-        <div class="stat-item reveal">
-          <div class="stat-number">6wk</div>
-          <div class="stat-label">Avg. time to deploy</div>
-        </div>
-        <div class="stat-item reveal">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Clients who re-engage</div>
+
+        <!-- Chart 2: Features per month -->
+        <div class="chart-card reveal">
+          <h4 class="chart-title">Features shipped per month</h4>
+          <p class="chart-subtitle">Same team throughout.</p>
+          <div class="chart-container">
+            <svg viewBox="0 0 800 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Subtle grid -->
+              <line x1="50" y1="200" x2="770" y2="200" stroke="rgba(232,154,46,0.06)" stroke-width="1"/>
+              <line x1="50" y1="140" x2="770" y2="140" stroke="rgba(232,154,46,0.06)" stroke-width="1"/>
+              <line x1="50" y1="80" x2="770" y2="80" stroke="rgba(232,154,46,0.06)" stroke-width="1"/>
+              <line x1="50" y1="20" x2="770" y2="20" stroke="rgba(232,154,46,0.06)" stroke-width="1"/>
+              <!-- Engagement line -->
+              <line x1="415" y1="10" x2="415" y2="205" stroke="rgba(232,154,46,0.3)" stroke-width="1" stroke-dasharray="4,4"/>
+              <!-- Before bars (dim) -->
+              <rect x="62" y="196" width="35" height="4" rx="2" fill="rgba(232,154,46,0.15)"/>
+              <rect x="107" y="192" width="35" height="8" rx="2" fill="rgba(232,154,46,0.15)"/>
+              <rect x="152" y="190" width="35" height="10" rx="2" fill="rgba(232,154,46,0.15)"/>
+              <rect x="197" y="194" width="35" height="6" rx="2" fill="rgba(232,154,46,0.15)"/>
+              <rect x="242" y="184" width="35" height="16" rx="2" fill="rgba(232,154,46,0.15)"/>
+              <rect x="287" y="190" width="35" height="10" rx="2" fill="rgba(232,154,46,0.15)"/>
+              <rect x="332" y="186" width="35" height="14" rx="2" fill="rgba(232,154,46,0.15)"/>
+              <rect x="377" y="188" width="35" height="12" rx="2" fill="rgba(232,154,46,0.15)"/>
+              <!-- After bars (bright amber) -->
+              <rect x="422" y="162" width="35" height="38" rx="2" fill="rgba(232,154,46,0.5)"/>
+              <rect x="467" y="124" width="35" height="76" rx="2" fill="rgba(232,154,46,0.6)"/>
+              <rect x="512" y="105" width="35" height="95" rx="2" fill="rgba(232,154,46,0.7)"/>
+              <rect x="557" y="96" width="35" height="104" rx="2" fill="rgba(232,154,46,0.75)"/>
+              <rect x="602" y="20" width="35" height="180" rx="2" fill="#e89a2e"/>
+              <rect x="647" y="30" width="35" height="170" rx="2" fill="#e89a2e"/>
+              <rect x="692" y="38" width="35" height="162" rx="2" fill="rgba(232,154,46,0.9)"/>
+              <rect x="737" y="58" width="35" height="142" rx="2" fill="rgba(232,154,46,0.8)"/>
+              <!-- Peak label -->
+              <text x="619" y="14" fill="#e89a2e" font-family="Outfit,sans-serif" font-size="12" font-weight="600" text-anchor="middle">110</text>
+            </svg>
+          </div>
+          <div class="chart-callout">
+            <div class="callout-item">
+              <div class="callout-number">~5/mo</div>
+              <div class="callout-label">Before engagement</div>
+            </div>
+            <div class="callout-item">
+              <div class="callout-number">~80/mo</div>
+              <div class="callout-label">After engagement</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
