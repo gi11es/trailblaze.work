@@ -1,0 +1,70 @@
+## Claude Code Prompts
+
+**Session**: eed1d6a4-6306-4785-a0bd-10feb00b4936
+**Captured**: 2026-02-26T14:43:00Z
+
+### Prompts
+
+**1.** Implement the following plan:
+
+# Plan: Fix multi-commit bug + capture permission modes
+
+## Context
+
+Two improvements to `capture-prompts.sh` in both repos (`claude-git-prompt-magic` and `trailblaze.work`):
+
+1. **Bug**: When Claude makes multiple commits in a single turn (no user prompt between them), the 2nd+ commits get **no note** because `extract_prompts` finds zero user messages between adjacent commits and returns `[]`.
+2. **Feature**: The transcript stores `permissionMode` on every user record (`plan`, `default`, `dontAsk`, `acceptEdits`, `bypassPermissions`). Annotating prompts with their mode shows the workflow context.
+
+---
+
+## Changes
+
+### File: `hooks/capture-prompts.sh` (both repos)
+
+#### Fix 1: Multi-commit in one turn
+
+In `extract_prompts`, when we hit a previous commit boundary with no prompts collected yet, **keep searching** instead of stopping. This way all commits in a burst share the same originating prompts.
+
+Current (line ~128-131):
+```python
+else:
+    # Previous commit -- stop collecting
+    prompts.reverse()
+    return prompts
+```
+
+Change to:
+```python
+else:
+    if prompts:
+        # We have prompts, stop here
+        prompts.reverse()
+        return prompts
+    # No prompts between commits (multi-commit turn), keep looking
+```
+
+#### Fix 2: Capture permission mode
+
+In `extract_text`, also return the `permissionMode` from the record. Annotate prompts with a mode tag when not default/empty.
+
+- Extract `permissionMode` from each user record
+- Prefix prompt with `[plan]`, `[auto-accept]`, etc. when mode is non-default
+- Map raw values to readable labels: `plan` → `plan`, `dontAsk` → `auto-accept`, `bypassPermissions` → `bypass`, `acceptEdits` → `accept-edits`
+
+Output example:
+```
+**1.** [plan] Design the new auth system
+**2.** [plan] What about OAuth?
+**3.** Implement it
+**4.** Commit and push
+```
+
+---
+
+## Files to modify
+
+1. `/Users/gilles/Documents/trailblaze/claude-git-prompt-magic/hooks/capture-prompts.sh`
+2. `/Users/gilles/Documents/trailbla... [truncated]
+
+**2.** [accept-edits] commit this and push
